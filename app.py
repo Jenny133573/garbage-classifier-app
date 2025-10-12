@@ -38,6 +38,7 @@ def plot_learning_curves(history):
 def load_model():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(script_dir, 'Trash_classifier.keras')
+    st.write(f"Attempting to load model from: {model_path}")
     model = load_model(model_path)
     return model
   
