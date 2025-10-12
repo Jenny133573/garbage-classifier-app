@@ -34,7 +34,7 @@ def plot_learning_curves(history):
 
 
 # Load the trained model
-@st.cache(allow_output_mutation=True)
+@st.cache_data(allow_output_mutation=True)
 def load_model():
     model = load_model('Trash_classifier.keras')
     return model
