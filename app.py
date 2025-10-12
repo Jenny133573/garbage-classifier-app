@@ -34,10 +34,13 @@ def plot_learning_curves(history):
 
 
 # Load the trained model
-@st.cache_data(allow_output_mutation=True)
+@st.cache_resource
 def load_model():
-    model = load_model('Trash_classifier.keras')
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(script_dir, 'Trash_classifier.keras'
+    model = load_model(model_path)
     return model
+  
 model = load_model()
 
 # Define the class names based on the model's output (0 for not_recyclable, 1 for recyclable)
