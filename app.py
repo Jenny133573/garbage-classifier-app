@@ -47,21 +47,21 @@ model = model_load()
 
 # load the training history
 @st.cache_resource
-def load_history():
+def load_history(file_path):
   script_dir=os.path.dirname(os.path.abspath(__file__))
-  hiostry_path=os.path.join(script_dir, "training_history.pkl")
+  history_path=os.path.join(script_dir, file_path)
   try:
     with open(history_path, 'rb') as f:
       history=pickle.load(f)
       return history
   except FileNotFoundError:
-    st.error("Please ensure the file training_history.pkl is in the Github repo.")
+    st.error("Please ensure the file is in the Github repo.")
     return None
   except Exception as e:
     st.error("Error loading training_history:", e)
     return None
 
-history=load_history()
+history=load_history("initial_training_hitory.pkl")
 # Define the class names based on the model's output (0 for not_recyclable, 1 for recyclable)
 class_names = ['not_recyclable', 'recyclable']
 
