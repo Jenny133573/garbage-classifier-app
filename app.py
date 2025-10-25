@@ -85,7 +85,7 @@ with tab1:
   st.header("Data")
   st.write("The dataset used for training was from the Garbage Classification (12 classes) Dataset from Kaggle")
   st.link_button("Visit Dataset Website", "https://www.kaggle.com/datasets/mostafaabla/garbage-classification")
-  st.markdown("**Visualization for training process before fine-tuning the model.**")
+  st.subheader("**Visualization for training process before fine-tuning the model.**")
   # Call the plotting function and display the plot
   # Assuming 'history' object is available globally or passed somehow
   # Replace 'history' with your actual history object from training
@@ -94,7 +94,7 @@ with tab1:
       st.pyplot(fig)
   except NameError:
       st.warning("Training history not available. Please run the training cell first.")
-  st.markdown("**Visulization for training process after fine-tuning the model.**")
+  st.subheader("**Visulization for training process after fine-tuning the model.**")
 
 
 with tab2:
