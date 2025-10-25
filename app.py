@@ -7,17 +7,21 @@ import os
 import matplotlib.pyplot as plt # Import matplotlib
 import pickle
 
-# Assume plot_learning_curves is defined in this file or imported
-# If plot_learning_curves is in a different file, you'll need to import it like:
-# from your_module import plot_learning_curves
 
 # Define the plot_learning_curves function (if not imported)
 def plot_learning_curves(history):
-  acc = history.history['accuracy']
-  val_acc = history.history['val_accuracy']
-  loss = history.history['loss']
-  val_loss = history.history['val_loss']
-  epochs_range = range(10)
+  if hasattr (history, "history"):
+    acc = history.history['accuracy']
+    val_acc = history.history['val_accuracy']
+    loss = history.history['loss']
+    val_loss = history.history['val_loss']
+  else:
+    acc=history['accuracy']
+    val_acc=history['val_accuracy']
+    loss=history['loss']
+    val_loss=history['val_loss']
+    
+  epochs_range = range(len(acc))
 
   fig, axes = plt.subplots(1, 2, figsize=(8, 8)) # Use subplots to get figure and axes
 
