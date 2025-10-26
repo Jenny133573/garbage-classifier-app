@@ -72,7 +72,8 @@ def load_history(file_path):
     st.error("Error loading training_history:", e)
     return None
 
-history=load_history("initial_training_hitory.pkl")
+history1=load_history("initial_training_hitory.pkl")
+history2=load_history("fine_tuned_history.pkl")
 # Define the class names based on the model's output (0 for not_recyclable, 1 for recyclable)
 class_names = ['not_recyclable', 'recyclable']
 
@@ -97,12 +98,14 @@ with tab1:
   # Assuming 'history' object is available globally or passed somehow
   # Replace 'history' with your actual history object from training
   try:
-      fig = plot_learning_curves(history)
+      fig = plot_learning_curves(history1)
       st.pyplot(fig)
   except NameError:
-      st.warning("Training history not available. Please run the training cell first.")
+      st.warning("Training history not available. Please run the training cell fir
+      st.")
   st.subheader("Visulization for training process after fine-tuning the model.")
-
+      fig2=plot_learning_curves(history2)
+      st.pyplot(fig)
 
 with tab2:
   st.header("Upload an image")
