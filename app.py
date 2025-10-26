@@ -6,6 +6,7 @@ from PIL import Image
 import os
 import matplotlib.pyplot as plt # Import matplotlib
 import pickle
+import urllib.request
 
 
 # Define the plot_learning_curves function (if not imported)
