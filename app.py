@@ -101,11 +101,10 @@ with tab1:
       fig = plot_learning_curves(history1)
       st.pyplot(fig)
   except NameError:
-      st.warning("Training history not available. Please run the training cell fir
-      st.")
+      st.warning("Training history not available. Please run the training cell first.")
   st.subheader("Visulization for training process after fine-tuning the model.")
-      fig2=plot_learning_curves(history2)
-      st.pyplot(fig)
+  fig2=plot_learning_curves(history2)
+  st.pyplot(fig)
 
 with tab2:
   st.header("Upload an image")
