@@ -37,17 +37,22 @@ def plot_learning_curves(history):
 
   return fig # Return the figure object
 
+MODEL_URL="https://github.com/Jenny133573/garbage-classifier-app/releases/download/MobileNetV2/fine_tuned_Trash_classifier.keras"
+MODEL_PATH="fine_tuned_Trash_classifier.keras"
 
 # Load the trained model
-@st.cache_resource
-def model_load():
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(script_dir, 'Trash_classifier.keras')
-    st.write(f"Attempting to load model from: {model_path}")
-    model = load_model(model_path)
-    return model
-  
-model = model_load()
+if not os.path.exists(MODEL_PATH):
+    st.info("Downloading model... (first run only)")
+    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)  # Downloads directly to MODEL_PATH
+    st.success("Model downloaded!")
+
+try:
+    model = tf.keras.models.load_model(MODEL_PATH)
+    st.write("Model loaded successfully!")
+except Exception as e:
+    st.error(f"Failed to load model: {e}")
+    st.stop()
+
 
 # load the training history
 @st.cache_resource
