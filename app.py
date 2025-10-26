@@ -7,6 +7,7 @@ import os
 import matplotlib.pyplot as plt # Import matplotlib
 import pickle
 import urllib.request
+import tensorflow as tf
 
 
 # Define the plot_learning_curves function (if not imported)
