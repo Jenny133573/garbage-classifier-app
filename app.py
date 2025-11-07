@@ -86,16 +86,15 @@ with tab1:
   st.header("Data")
   st.write("The dataset used for training was from the Garbage Classification (12 classes) Dataset from Kaggle")
   st.link_button("Visit Dataset Website", "https://www.kaggle.com/datasets/mostafaabla/garbage-classification")
-  st.subheader("Visualization for training process for the model.")
+  st.markdown("Visualization for Training Process")
   # Call the plotting function and display the plot
   # Assuming 'history' object is available globally or passed somehow
   # Replace 'history' with your actual history object from training
   try:
-      fig = plot_learning_curves(history1)
+      fig = plot_learning_curves(history)
       st.pyplot(fig)
   except NameError:
       st.warning("Training history not available. Please run the training cell first.")
-  st.pyplot(fig)
 
 with tab2:
   st.header("Upload an image")
