@@ -6,7 +6,6 @@ from PIL import Image
 import os
 import matplotlib.pyplot as plt # Import matplotlib
 import pickle
-import urllib.request
 import tensorflow as tf
 
 
@@ -39,21 +38,16 @@ def plot_learning_curves(history):
 
   return fig # Return the figure object
 
-MODEL_URL="https://github.com/Jenny133573/garbage-classifier-app/releases/download/MobileNetV2/fine_tuned_Trash_classifier.keras"
-MODEL_PATH="fine_tuned_Trash_classifier.keras"
-
 # Load the trained model
-if not os.path.exists(MODEL_PATH):
-    st.info("Downloading model... (first run only)")
-    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)  # Downloads directly to MODEL_PATH
-    st.success("Model downloaded!")
+@st.cache_resource
+def model_load():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(script_dir, 'Trash_classifier.keras')
+    st.write(f"Attempting to load model from: {model_path}")
+    model = load_model(model_path)
+    return model
 
-try:
-    model = tf.keras.models.load_model(MODEL_PATH)
-    st.write("Model loaded successfully!")
-except Exception as e:
-    st.error(f"Failed to load model: {e}")
-    st.stop()
+model = model_load()
 
 
 # load the training history
@@ -72,8 +66,7 @@ def load_history(file_path):
     st.error("Error loading training_history:", e)
     return None
 
-history1=load_history("initial_training_hitory.pkl")
-history2=load_history("fine_tuned_history.pkl")
+history=load_history("initial_training_hitory.pkl")
 # Define the class names based on the model's output (0 for not_recyclable, 1 for recyclable)
 class_names = ['not_recyclable', 'recyclable']
 
@@ -93,7 +86,7 @@ with tab1:
   st.header("Data")
   st.write("The dataset used for training was from the Garbage Classification (12 classes) Dataset from Kaggle")
   st.link_button("Visit Dataset Website", "https://www.kaggle.com/datasets/mostafaabla/garbage-classification")
-  st.subheader("Visualization for training process before fine-tuning the model.")
+  st.subheader("Visualization for training process for the model.")
   # Call the plotting function and display the plot
   # Assuming 'history' object is available globally or passed somehow
   # Replace 'history' with your actual history object from training
@@ -102,8 +95,6 @@ with tab1:
       st.pyplot(fig)
   except NameError:
       st.warning("Training history not available. Please run the training cell first.")
-  st.subheader("Visulization for training process after fine-tuning the model.")
-  fig2=plot_learning_curves(history2)
   st.pyplot(fig)
 
 with tab2:
