@@ -60,7 +60,7 @@ def load_history(file_path):
     st.error("Error loading training_history:", e)
     return None
 
-history=load_history("initial_training_hitory.pkl")
+history=load_history("fine_tuned_history_with_weights.pkl")
 # Define the class names based on the model's output (0 for not_recyclable, 1 for recyclable)
 class_names = ['not_recyclable', 'recyclable']
 
