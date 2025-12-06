@@ -7,6 +7,7 @@ import os
 import matplotlib.pyplot as plt # Import matplotlib
 import pickle
 import tensorflow as tf
+import requests
 
 
 # Define the plot_learning_curves function (if not imported)
@@ -39,16 +40,9 @@ def plot_learning_curves(history):
   return fig # Return the figure object
 
 # Load the trained model
-@st.cache_resource
-def model_load():
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(script_dir, 'Trash_classifier.keras')
-    st.write(f"Attempting to load model from: {model_path}")
-    model = load_model(model_path)
-    return model
-
-model = model_load()
-
+url="https://github.com/Jenny133573/garbage-classifier-app/releases/download/Model_with_weights/fine_tuned_Trash_classifier_with_weights.keras"
+open("fine_tuned_Trash_classifier_with_weights.keras", "wb").write(requests.get(url).content)
+model = tf.keras.models.load_model('fine_tuned_Trash_classifier_with_weights.keras')
 
 # load the training history
 @st.cache_resource
