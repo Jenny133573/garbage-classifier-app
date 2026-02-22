@@ -90,6 +90,16 @@ with tab1:
   except NameError:
       st.warning("Training history not available. Please run the training cell first.")
 
+  fig,ax=plt.subplots()
+  models=['Random Forest', 'Gradient Boosting']
+  accuracy=[58,50]
+  bar_colors=['red', 'blue']
+  ax.bar(models, accuracy, color=bar_colors)
+  ax.set_ylabel('Accuracy')
+  ax.set_titile("Comparison between 3 models")
+  plt.ylim(0,100)
+  plt.show()
+
 with tab2:
   st.header("Upload an image")
   uploaded_file = st.file_uploader("Choose an image...", type="jpg")
