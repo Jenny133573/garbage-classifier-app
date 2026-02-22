@@ -124,7 +124,7 @@ with tab1:
   ax_3.set_ylabel('Accuracy')
   ax_3.set_title("Comparison between 3 models")
   plt.ylim(0,100)
-  st.pyplot(fif_3, ax_3)
+  st.pyplot(fig_3, ax_3)
 
 with tab2:
   st.header("Upload an image")
