@@ -60,8 +60,8 @@ def load_resource(file_path):
     st.error("Error loading training_history:", e)
     return None
 
-history=load_resource("fine_tuned_history_2.pkl")
-initial_history=load_resource("intial_hitory_2 (1).pkl")
+fine_tuned_history=load_resource("fine_tuned_history_2.pkl")
+history=load_resource("intial_hitory_2 (1).pkl")
 class_counts=load_resource('class_counts')
 # Define the class names based on the model's output (0 for not_recyclable, 1 for recyclable)
 class_names = ['not_recyclable', 'recyclable']
@@ -101,7 +101,7 @@ with tab1:
   # Assuming 'history' object is available globally or passed somehow
   # Replace 'history' with your actual history object from training
   try:
-      fig_1 = plot_learning_curves(initial_history)
+      fig_1 = plot_learning_curves(history)
       st.pyplot(fig_1)
   except NameError:
       st.warning("Training history not available. Please run the training cell first.")
