@@ -40,13 +40,13 @@ def plot_learning_curves(history):
   return fig # Return the figure object
 
 # Load the trained model
-url="https://github.com/Jenny133573/garbage-classifier-app/releases/download/Model_with_weights/fine_tuned_Trash_classifier_with_weights.keras"
-open("fine_tuned_Trash_classifier_with_weights.keras", "wb").write(requests.get(url).content)
-model = tf.keras.models.load_model('fine_tuned_Trash_classifier_with_weights.keras')
+url="https://github.com/Jenny133573/garbage-classifier-app/releases/download/Model_with_weights/fine_tuned_Trash_classifier_2.keras"
+open("fine_tuned_Trash_classifier_2.keras", "wb").write(requests.get(url).content)
+model = tf.keras.models.load_model('fine_tuned_Trash_classifier_2.keras')
 
 # load the training history
 @st.cache_resource
-def load_history(file_path):
+def load_resource(file_path):
   script_dir=os.path.dirname(os.path.abspath(__file__))
   history_path=os.path.join(script_dir, file_path)
   try:
@@ -60,7 +60,9 @@ def load_history(file_path):
     st.error("Error loading training_history:", e)
     return None
 
-history=load_history("fine_tuned_history_with_weights.pkl")
+fine_tuned_history=load_resource("fine_tuned_history_2.pkl")
+initial_history=load_resource("intial_hitory_2 (1).pkl")
+class_counts=load_resource('class_counts')
 # Define the class names based on the model's output (0 for not_recyclable, 1 for recyclable)
 class_names = ['not_recyclable', 'recyclable']
 
@@ -80,20 +82,43 @@ with tab1:
   st.header("Data")
   st.write("The dataset used for training was from the Garbage Classification (12 classes) Dataset from Kaggle")
   st.link_button("Visit Dataset Website", "https://www.kaggle.com/datasets/mostafaabla/garbage-classification")
+  st.markdown("Class Distribution Graph")
+# Plot the class distribution bar charts
+  try:
+    plt.figure(figsize=(8,8))
+    fig, ax=plt.subplots()
+    classes_name=['non_recyclable', 'recyclable']
+    bar_colors=('m', 'b')
+    ax.bar(classes_name, class_counts, color=bar_colors)
+    ax.set_title("Class distribution for training dataset")
+    ax.set_ylabel('class counts')
+    st.pyplots(fig, ax)
+  except NameError:
+    st.warning("Class count is not available. Please check the existing file.")
+  
   st.markdown("Visualization for Training Process")
   # Call the plotting function and display the plot
   # Assuming 'history' object is available globally or passed somehow
   # Replace 'history' with your actual history object from training
   try:
-      fig = plot_learning_curves(history)
+      fig = plot_learning_curves(initial_history)
       st.pyplot(fig)
   except NameError:
       st.warning("Training history not available. Please run the training cell first.")
+
+  st.markdown("Visualization for Fine Tuning Process")
+  try:
+    fig=plot_learning_curves(fine_tuned_history)
+    st.pyplot(fig)
+  except NameError:
+    st.warning("Fine Tune history not available. Please check again.")
+
+  
   st.markdown("Accuracy Graph")
   fig,ax=plt.subplots()
-  models=['Random Forest', 'Gradient Boosting']
-  accuracy=[58,50]
-  bar_colors=['red', 'blue']
+  models=['Random Forest', 'Gradient Boosting','MobileNetV2']
+  accuracy=[58,50, 74]
+  bar_colors=['red', 'blue', 'purple']
   ax.bar(models, accuracy, color=bar_colors)
   ax.set_ylabel('Accuracy')
   ax.set_title("Comparison between 3 models")
