@@ -98,7 +98,7 @@ with tab1:
   ax.set_ylabel('Accuracy')
   ax.set_title("Comparison between 3 models")
   plt.ylim(0,100)
-  plt.show()
+  st.pyplot(fig, ax)
 
 with tab2:
   st.header("Upload an image")
