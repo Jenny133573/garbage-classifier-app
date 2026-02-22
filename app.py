@@ -101,29 +101,30 @@ with tab1:
   # Assuming 'history' object is available globally or passed somehow
   # Replace 'history' with your actual history object from training
   try:
-      fig = plot_learning_curves(initial_history)
-      st.pyplot(fig)
+      fig_1 = plot_learning_curves(initial_history)
+      st.pyplot(fig_1)
   except NameError:
       st.warning("Training history not available. Please run the training cell first.")
 
   st.markdown("Visualization for Fine Tuning Process")
+  
   try:
-    fig=plot_learning_curves(fine_tuned_history)
-    st.pyplot(fig)
+    fig_2=plot_learning_curves(fine_tuned_history)
+    st.pyplot(fig_2)
   except NameError:
     st.warning("Fine Tune history not available. Please check again.")
 
   
   st.markdown("Accuracy Graph")
-  fig,ax=plt.subplots()
+  fig_3,ax_3=plt.subplots()
   models=['Random Forest', 'Gradient Boosting','MobileNetV2']
   accuracy=[58,50, 74]
   bar_colors=['red', 'blue', 'purple']
-  ax.bar(models, accuracy, color=bar_colors)
-  ax.set_ylabel('Accuracy')
-  ax.set_title("Comparison between 3 models")
+  ax_3.bar(models, accuracy, color=bar_colors)
+  ax_3.set_ylabel('Accuracy')
+  ax_3.set_title("Comparison between 3 models")
   plt.ylim(0,100)
-  st.pyplot(fig, ax)
+  st.pyplot(fi_3g, ax_3)
 
 with tab2:
   st.header("Upload an image")
