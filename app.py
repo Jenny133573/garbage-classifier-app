@@ -89,14 +89,14 @@ with tab1:
       st.pyplot(fig)
   except NameError:
       st.warning("Training history not available. Please run the training cell first.")
-
+  st.markdown("Accuracy Graph")
   fig,ax=plt.subplots()
   models=['Random Forest', 'Gradient Boosting']
   accuracy=[58,50]
   bar_colors=['red', 'blue']
   ax.bar(models, accuracy, color=bar_colors)
   ax.set_ylabel('Accuracy')
-  ax.set_titile("Comparison between 3 models")
+  ax.set_title("Comparison between 3 models")
   plt.ylim(0,100)
   plt.show()
 
