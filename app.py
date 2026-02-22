@@ -60,7 +60,7 @@ def load_resource(file_path):
     st.error("Error loading training_history:", e)
     return None
 
-fine_tuned_history=load_resource("fine_tuned_history_2.pkl")
+history=load_resource("fine_tuned_history_2.pkl")
 initial_history=load_resource("intial_hitory_2 (1).pkl")
 class_counts=load_resource('class_counts')
 # Define the class names based on the model's output (0 for not_recyclable, 1 for recyclable)
