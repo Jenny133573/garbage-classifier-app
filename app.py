@@ -101,7 +101,7 @@ with tab1:
   # Assuming 'history' object is available globally or passed somehow
   # Replace 'history' with your actual history object from training
   try:
-      fig_1 = plot_learning_curves(_initial_history)
+      fig_1 = plot_learning_curves(initial_history)
       st.pyplot(fig_1)
   except NameError:
       st.warning("Training history not available. Please run the training cell first.")
