@@ -92,7 +92,7 @@ with tab1:
     ax.bar(classes_name, class_counts, color=bar_colors)
     ax.set_title("Class distribution for training dataset")
     ax.set_ylabel('class counts')
-    st.pyplots(fig, ax)
+    st.pyplot(fig, ax)
   except NameError:
     st.warning("Class count is not available. Please check the existing file.")
   
